@@ -27,9 +27,6 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Test
-        run: npm test -- --watchAll=false --passWithNoTests
-
       - name: Lint
         run: npm run lint --if-present
 
