@@ -1,0 +1,58 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    branches: ['**']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: MELT CI Discord Notification (success)
+        if: ${{ success() }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD }}
+          title: '✅ MELT CI Success'
+          status: ${{ job.status }}
+          description: '잇흉'
+          color: 65280
+          url: 'https://discord.com/api/webhooks/1455804347668496476/4UmZwifZELG5yZlys4Yz1UsrMUVokOMsR-727_wkg4u6OdVDJHYNIu3VlbZ6HJBVQXmR'
+          username: 'MELT-bot'
+
+      - name: MELT CI Discord Notification (failure)
+        if: ${{ failure() }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD }}
+          title: '❗️ MELT CI Fail'
+          status: ${{ job.status }}
+          description: '살려주시라요'
+          color: 16711680
+          url: 'https://discord.com/api/webhooks/1455804347668496476/4UmZwifZELG5yZlys4Yz1UsrMUVokOMsR-727_wkg4u6OdVDJHYNIu3VlbZ6HJBVQXmR'
+          username: 'MELT-bot'
