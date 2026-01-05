@@ -9,7 +9,12 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
   const pathname = usePathname();
   return (
-    <header className="flex items-center justify-between w-full h-[70px] px-[600px] py-[15px] bg-white border-b border-[#E3E3E3]">
+    <header
+      className="flex items-center justify-between w-full
+    h-[56px] lg:h-[70px]
+    px-4 md:px-30 lg:px-40 xl:px-[500px]
+    bg-white border-b border-[#E3E3E3]"
+    >
       <Link href="/today">
         <Image src={logo} width={63} height={30} alt="logo" />
       </Link>
