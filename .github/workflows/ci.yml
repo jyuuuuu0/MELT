@@ -42,7 +42,6 @@ jobs:
           status: ${{ job.status }}
           description: '잇흉'
           color: 65280
-          url: 'https://discord.com/api/webhooks/1455804347668496476/4UmZwifZELG5yZlys4Yz1UsrMUVokOMsR-727_wkg4u6OdVDJHYNIu3VlbZ6HJBVQXmR'
           username: 'MELT-bot'
 
       - name: MELT CI Discord Notification (failure)
@@ -54,5 +53,4 @@ jobs:
           status: ${{ job.status }}
           description: '살려주시라요'
           color: 16711680
-          url: 'https://discord.com/api/webhooks/1455804347668496476/4UmZwifZELG5yZlys4Yz1UsrMUVokOMsR-727_wkg4u6OdVDJHYNIu3VlbZ6HJBVQXmR'
           username: 'MELT-bot'
